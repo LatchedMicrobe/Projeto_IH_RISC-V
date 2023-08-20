@@ -18,8 +18,9 @@ module ALUController (
 
   assign Operation[1] = (ALUOp == 2'b00) ||  // LW\SW
       ((ALUOp == 2'b10) && (Funct3 == 3'b000)) ||  // R\I-add/addi
-      ((ALUOp == 2'b10) && (Funct3 == 3'b000) & (Funct7 == 7'b0100000)) || //R\I - sub
-      ((ALUOp == 2'b10) && (Funct3 == 3'b101) && (Funct7 == 7'b0100000));  // R\I-srai
+      ((ALUOp == 2'b10) && (Funct3 == 3'b000) && (Funct7 == 7'b0100000)) || //R\I - sub
+      ((ALUOp == 2'b10) && (Funct3 == 3'b101) && (Funct7 == 7'b0100000)) || // R\I-srai
+      (ALUOp == 2'b11);  //LUI
 
   assign Operation[2] =  ((ALUOp==2'b10) && (Funct3==3'b101) && (Funct7==7'b0000000)) || // R\I-srli
       ((ALUOp == 2'b10) && (Funct3 == 3'b101) && (Funct7 == 7'b0100000)) ||  // R\I-srai
@@ -28,5 +29,6 @@ module ALUController (
 
   assign Operation[3] = (ALUOp == 2'b01) ||  // BEQ
       ((ALUOp == 2'b10) && (Funct3 == 3'b100)) ||  // R\I-xor
-      ((ALUOp == 2'b10) && (Funct3 == 3'b010));  // R\I-slt/slti
+      ((ALUOp == 2'b10) && (Funct3 == 3'b010)) ||  // R\I-slt/slti
+      (ALUOp == 2'b11);  //LUI
 endmodule

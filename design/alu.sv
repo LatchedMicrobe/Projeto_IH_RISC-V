@@ -33,6 +33,8 @@ module alu#(
                     ALUResult = (SrcA == SrcB) ? 1 : 0;
 	    4'b1001:	    // XOR
 		    ALUResult = SrcA ^ SrcB;
+	    4'b1010:	    // LUI
+		    ALUResult = SrcB;
 	    4'b1100:	    // LessThan
 		    ALUResult = (SrcA < SrcB) ? 1 : 0;
             default:
