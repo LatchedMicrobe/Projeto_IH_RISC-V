@@ -26,7 +26,7 @@ module Controller (
   assign U_TYPE = 7'b0110111; //lui
   assign LW = 7'b0000011;  //lw,lb,lh,lbu
   assign SW = 7'b0100011;  //sw,sb,sh
-  assign BR = 7'b1100011;  //beq
+  assign BR = 7'b1100011;  //beq,bne,bge,blt
 
   assign ALUSrc = (Opcode == LW || Opcode == SW || Opcode == I_TYPE || Opcode == U_TYPE);
   assign MemtoReg = (Opcode == LW);
