@@ -39,7 +39,6 @@ module imm_Gen (
         inst_code[30:21],
         1'b0
       };
-
       default: Imm_out = {32'b0};
 
     endcase

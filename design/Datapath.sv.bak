@@ -323,7 +323,7 @@ module Datapath #(
      Mem_Out,
      D.Pc_Four,
      D.Pc_Imm,
-     D.Imm_Out,
+     D.Imm_out,
      D.RWSel,
      WrmuxSrc
  );
