@@ -46,7 +46,7 @@ module Datapath #(
   logic [DATA_W-1:0] Reg1, Reg2;
   logic [DATA_W-1:0] ReadData;
   logic [DATA_W-1:0] SrcB, ALUResult;
-  logic [DATA_W-1:0] ExtImm, BrImm, Old_PC_Four, BrPC;
+  logic [DATA_W-1:0] ExtImm, BrImm, Old_PC_Four, BrPC, Imm_OUT;
   logic [DATA_W-1:0] WrmuxSrc;
   logic PcSel;  // mux select / flush signal
   logic [1:0] FAmuxSel;
@@ -230,6 +230,7 @@ module Datapath #(
       B.Branch,
       B.jalrsel,
       ALUResult,
+      Imm_OUT,
       BrImm,
       Old_PC_Four,
       BrPC,
@@ -263,7 +264,7 @@ module Datapath #(
       C.jalrsel <= B.jalrsel;
       C.Pc_Imm <= BrImm;
       C.Pc_Four <= Old_PC_Four;
-      C.Imm_Out <= B.ImmG;
+      C.Imm_Out <= Imm_OUT;
       C.Alu_Result <= ALUResult;
       C.RD_Two <= FBmux_Result;
       C.rd <= B.rd;
