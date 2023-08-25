@@ -32,7 +32,7 @@ module Controller (
   assign JAL = 7'b1101111; //jal
   assign JALR = 7'b1100111; //jalr
 
-  assign ALUSrc = (Opcode == LW || Opcode == SW || Opcode == I_TYPE || Opcode == U_TYPE || Opcode == JALR);
+  assign ALUSrc = (Opcode == LW || Opcode == SW || Opcode == I_TYPE || Opcode == JALR);
   assign MemtoReg = (Opcode == LW);
   assign RegWrite = (Opcode == R_TYPE || Opcode == LW || Opcode == I_TYPE || Opcode == U_TYPE || Opcode == JAL || Opcode == JALR);
   assign MemRead = (Opcode == LW);
@@ -40,7 +40,7 @@ module Controller (
   assign ALUOp[0] = (Opcode == BR || Opcode == U_TYPE || Opcode == JAL);
   assign ALUOp[1] = (Opcode == R_TYPE || Opcode == I_TYPE || Opcode == U_TYPE || Opcode == JAL || Opcode == JALR);
   assign Branch = (Opcode == BR || Opcode == JAL || Opcode == JALR);
-  assign RWSel[0] = (Opcode == JAL || Opcode == JALR);
-  assign RWSel[1] = 0;
+  assign RWSel[0] = (Opcode == JAL || Opcode == JALR || Opcode == U_TYPE);
+  assign RWSel[1] = (Opcode == U_TYPE);
   assign jalrsel = (Opcode == JALR);
 endmodule
