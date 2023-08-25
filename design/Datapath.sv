@@ -18,6 +18,7 @@ module Datapath #(
     MemWrite,  // Register file or Immediate MUX // Memroy Writing Enable
     MemRead,  // Memroy Reading Enable
     Branch,  // Branch Enable
+    jalrsel,
     input  logic [          1:0] RWSel,
     input  logic [          1:0] ALUOp,
     input  logic [ALU_CC_W -1:0] ALU_CC,         // ALU Control Code ( input of the ALU )
@@ -27,8 +28,8 @@ module Datapath #(
     output logic [          1:0] ALUOp_Current,
     output logic [   DATA_W-1:0] WB_Data,        //Result After the last MUX
 
-    // Para depuração no tesbench:
-    output logic [4:0] reg_num,  //número do registrador que foi escrito
+    // Para depuraÃ§Ã£o no tesbench:
+    output logic [4:0] reg_num,  //nÃºmero do registrador que foi escrito
     output logic [DATA_W-1:0] reg_data,  //valor que foi escrito no registrador
     output logic reg_write_sig,  //sinal de escrita no registrador
 
@@ -144,6 +145,7 @@ module Datapath #(
       B.ALUOp <= 0;
       B.Branch <= 0;
       B.RWSel <= 0;
+      B.jalrsel <= 0;
       B.Curr_Pc <= 0;
       B.RD_One <= 0;
       B.RD_Two <= 0;
@@ -163,6 +165,7 @@ module Datapath #(
       B.ALUOp <= ALUOp;
       B.Branch <= Branch;
       B.RWSel <= RWSel;
+      B.jalrsel <= jalrsel;
       B.Curr_Pc <= A.Curr_Pc;
       B.RD_One <= Reg1;
       B.RD_Two <= Reg2;
@@ -225,6 +228,7 @@ module Datapath #(
       B.Curr_Pc,
       B.ImmG,
       B.Branch,
+      B.jalrsel,
       ALUResult,
       BrImm,
       Old_PC_Four,
@@ -241,6 +245,7 @@ module Datapath #(
       C.MemRead <= 0;
       C.MemWrite <= 0;
       C.RWSel <= 0;
+      C.jalrsel <= 0;
       C.Pc_Imm <= 0;
       C.Pc_Four <= 0;
       C.Imm_Out <= 0;
@@ -255,6 +260,7 @@ module Datapath #(
       C.MemRead <= B.MemRead;
       C.MemWrite <= B.MemWrite;
       C.RWSel <= B.RWSel;
+      C.jalrsel <= B.jalrsel;
       C.Pc_Imm <= BrImm;
       C.Pc_Four <= Old_PC_Four;
       C.Imm_Out <= B.ImmG;
@@ -291,6 +297,7 @@ module Datapath #(
       D.RegWrite <= 0;
       D.MemtoReg <= 0;
       D.RWSel <= 0;
+      D.jalrsel <= 0;
       D.Pc_Imm <= 0;
       D.Pc_Four <= 0;
       D.Imm_Out <= 0;
@@ -301,6 +308,7 @@ module Datapath #(
       D.RegWrite <= C.RegWrite;
       D.MemtoReg <= C.MemtoReg;
       D.RWSel <= C.RWSel;
+      D.jalrsel <= C.jalrsel;
       D.Pc_Imm <= C.Pc_Imm;
       D.Pc_Four <= C.Pc_Four;
       D.Imm_Out <= C.Imm_Out;
