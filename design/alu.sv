@@ -11,7 +11,7 @@ module alu#(
         input logic [OPCODE_LENGTH-1:0]    Operation,
         output logic[DATA_WIDTH-1:0] ALUResult
         );
-    
+
         always_comb
         begin
             case(Operation)
@@ -28,7 +28,7 @@ module alu#(
 	    4'b0101:	    // SRLI
 		    ALUResult = SrcA >> SrcB[4:0];
 	    4'b0111:	    // SRAI
-		    ALUResult = SrcA >>> SrcB[4:0];
+		    ALUResult = $signed(SrcA) >>> SrcB[4:0];
             4'b1000:        // Equal
                     ALUResult = (SrcA == SrcB) ? 1 : 0;
 	    4'b1001:	    // XOR
