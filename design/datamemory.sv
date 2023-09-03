@@ -49,11 +49,11 @@ module datamemory #(
     end else if (MemWrite) begin
       case (Funct3)
 	3'b000: begin //SB
-	  Wr <= 4'b1000;
+	  Wr <= 4'b0001;
 	  Datain <= wd;
 	end
 	3'b001: begin //SH
-	  Wr <= 4'b1100;
+	  Wr <= 4'b0011;
 	  Datain <= wd;
 	end
         3'b010: begin  //SW
